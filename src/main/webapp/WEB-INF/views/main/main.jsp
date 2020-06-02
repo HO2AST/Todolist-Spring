@@ -45,7 +45,6 @@
 		
 		$.ajax({
 			url : "${pageContext.request.contextPath}/login",
-			dataType : "Json",
 			type : "post",
 			data : $("#login_form").serialized(),
 			success : function() {

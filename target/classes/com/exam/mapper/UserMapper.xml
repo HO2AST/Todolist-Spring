@@ -4,8 +4,9 @@
 <mapper namespace="com.exam.mapper.UserMapper">
 	<select id="selectUser" parameterType="UserVO" resultType="int">
 		SELECT id
-			, password
+			 , password
 		FROM MBR
 		WHERE id = #{userId}
+			AND userId = #{userPasswd}
 	</select>
 </mapper>

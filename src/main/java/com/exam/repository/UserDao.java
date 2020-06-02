@@ -1,7 +1,9 @@
 package com.exam.repository;
 
+import java.util.List;
+
 import com.exam.domain.UserVO;
 
 public interface UserDao {
-	int selectUser(UserVO userVo);
+	List<UserVO> selectUser(UserVO userVO);
 }

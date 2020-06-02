@@ -1,8 +1,10 @@
 package com.exam.service;
 
+import java.util.List;
+
 import com.exam.domain.UserVO;
 
 public interface UserService {
 	
-	int selectUser(UserVO userVO);
+	List<UserVO> selectUser(UserVO userVO);
 }

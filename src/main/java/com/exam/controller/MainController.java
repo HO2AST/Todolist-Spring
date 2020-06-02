@@ -9,6 +9,5 @@ public class MainController {
 	@RequestMapping(value="/")
 	public String main() throws Exception {
 		return "main/main";
-	}			
-	
+	}
 }

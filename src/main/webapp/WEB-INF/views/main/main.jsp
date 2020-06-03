@@ -43,12 +43,20 @@
 			return;
 		}
 		
+		let loginForm = $("#login_form").serialize();
+		
+		console.log(loginForm);
+		
 		$.ajax({
-			url : "${pageContext.request.contextPath}/login",
+			url : "${pageContext.request.contextPath}/member/login",
 			type : "post",
-			data : $("#login_form").serialized(),
+			data : $("#login_form").serialize(),
 			success : function() {
-				document.location.href="${pageContext.request.contextPath}/todolist";
+				alert("성공");
+ 				document.location.href="${pageContext.request.contextPath}/todolist/todolist";
+			},
+			error :  function (request, status, error) {
+				alert("실패" + status +  error);
 			}
 		})
 	});

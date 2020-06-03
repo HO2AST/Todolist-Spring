@@ -4,8 +4,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.exam.domain.UserVO;
 import com.exam.service.UserService;
@@ -18,13 +20,16 @@ public class UserController {
 	UserService userService;
 	
 	@PostMapping("/login")
+	@ResponseBody
 	public String login(UserVO userVO) {
 		
 		List<UserVO> list = userService.selectUser(userVO);
 		
 		if (list.size() > 0) {
-			System.out.println("로그인완료");
+			for (int i = 0; i < list.size(); i++) {
+				System.out.println(list.get(i));
+			}
 		}
-		return "todolist/todolist";
+		return "";
 	}
 }

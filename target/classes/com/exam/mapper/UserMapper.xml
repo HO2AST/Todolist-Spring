@@ -2,11 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.exam.mapper.UserMapper">
-	<select id="selectUser" parameterType="UserVO" resultType="int">
-		SELECT id
-			 , password
+	<select id="selectUser" parameterType="UserVO" resultType="UserVO">
+		SELECT ID, PASSWORD
 		FROM MBR
-		WHERE id = #{userId}
-			AND userId = #{userPasswd}
+		WHERE ID = #{userId}
+			  AND PASSWORD = #{userPasswd}
 	</select>
 </mapper>

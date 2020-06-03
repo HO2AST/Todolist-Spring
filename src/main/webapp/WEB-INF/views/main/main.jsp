@@ -51,9 +51,12 @@
 			url : "${pageContext.request.contextPath}/member/login",
 			type : "post",
 			data : $("#login_form").serialize(),
-			success : function() {
-				alert("성공");
- 				document.location.href="${pageContext.request.contextPath}/todolist/todolist";
+			success : function(data) {
+				if (data == "1") {
+	 				document.location.href="${pageContext.request.contextPath}/todolist/todolist";
+				} else {
+					alert("아이디 혹은 비밀번호를 확인해주세요.");
+				}
 			},
 			error :  function (request, status, error) {
 				alert("실패" + status +  error);

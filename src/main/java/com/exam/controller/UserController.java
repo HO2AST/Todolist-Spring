@@ -15,21 +15,22 @@ import com.exam.service.UserService;
 @Controller
 @RequestMapping("/member/*")
 public class UserController {
-	
+
 	@Autowired
 	UserService userService;
-	
+
 	@PostMapping("/login")
 	@ResponseBody
 	public String login(UserVO userVO) {
-		
+
 		List<UserVO> list = userService.selectUser(userVO);
-		
-		if (list.size() > 0) {
-			for (int i = 0; i < list.size(); i++) {
-				System.out.println(list.get(i));
-			}
+
+	
+		if (list.size() > 0) { 
+			return "1";
+		} else { 
+			return "0"; 
 		}
-		return "";
+
 	}
 }

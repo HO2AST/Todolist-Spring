@@ -2,6 +2,9 @@ package com.exam.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,12 +24,12 @@ public class UserController {
 
 	@PostMapping("/login")
 	@ResponseBody
-	public String login(UserVO userVO) {
+	public String login(HttpSession session, UserVO userVO) {
 
 		List<UserVO> list = userService.selectUser(userVO);
-
 	
 		if (list.size() > 0) { 
+			session.setAttribute("id", userVO.getUserId());
 			return "1";
 		} else { 
 			return "0"; 

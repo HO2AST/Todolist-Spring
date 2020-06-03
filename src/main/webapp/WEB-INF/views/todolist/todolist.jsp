@@ -28,11 +28,12 @@
 		
 		if (todolist == "") {
 			alert("할일을 입력하세요.")
-			return;
+			return false;
 		}
 		
 		$.ajax({
 			url : "${pageContext.request.contextPath}/todolist/wirte",
+			type : "post"
 			data : $("#todo_form").serialize(),
 			success : function(data) {
 				let addTodo = ""

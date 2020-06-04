@@ -6,5 +6,7 @@ import com.exam.domain.TodoVO;
 
 public interface TodoService {
 	
-	List<TodoVO> writeTodo(TodoVO todoVO);
+	void writeTodo(TodoVO todoVO);
+	
+	List<TodoVO> selectTodo(String userId);
 }

@@ -14,7 +14,7 @@
 	<div>
 		<form id="todo_form" method="post">
 			<input type="hidden" id="userId" name="userId" value="${id}"/>
-			<input name="todo" id="todo" type="text" width="100px" height="15px" placeholder="할일을 입력하세요."/><button id="write">등록하기</button>
+			<input name="todo" id="todo" type="text" width="100px" height="15px" placeholder="할일을 입력하세요."/><button id="writeTodo">등록하기</button>
 		</form> 
 		<div id="todolist">
 			
@@ -23,7 +23,7 @@
 	
 
 <script>
-	$("#write").click(function() {
+	$("#writeTodo").click(function() {
 		let todolist = $("#todo").val();
 		
 		if (todolist == "") {
@@ -32,16 +32,20 @@
 		}
 		
 		$.ajax({
-			url : "${pageContext.request.contextPath}/todolist/wirte",
-			type : "post"
+			url : "${pageContext.request.contextPath}/todolist/write",
+			type : "post",
 			data : $("#todo_form").serialize(),
 			success : function(data) {
-				let addTodo = ""
-				addTodo += '<div class="todo">'+data.todo+'</div>';
-				$("#todolist").append(addTodo);
+				console.log(data);
+				if (data=='1') {
+					let addTodo = ""
+					addTodo += '<div class="todo">${todolist.todo}</div>';
+					$("#todolist").append(addTodo);
+				}
 			},
 			error : function(request, status, error) {
 				alert("문제가 발생했습니다.");
+				return;
 			}
 		})
 	});

@@ -16,7 +16,7 @@ import com.exam.domain.UserVO;
 import com.exam.service.UserService;
 
 @Controller
-@RequestMapping("/member")
+@RequestMapping("/member/")
 public class UserController {
 
 	@Autowired

@@ -53,7 +53,7 @@
 			data : $("#login_form").serialize(),
 			success : function(data) {
 				if (data == "1") {
-	 				document.location.href="${pageContext.request.contextPath}/todolist";
+	 				document.location.href="${pageContext.request.contextPath}/todolist/";
 				} else {
 					alert("아이디 혹은 비밀번호를 확인해주세요.");
 				}

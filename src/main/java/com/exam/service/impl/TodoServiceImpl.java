@@ -16,8 +16,8 @@ public class TodoServiceImpl implements TodoService{
 	TodoMapper todoMapper;
 	
 	@Override
-	public void writeTodo(TodoVO todoVO) {
-		todoMapper.writeTodo(todoVO);
+	public int writeTodo(TodoVO todoVO) {
+		return todoMapper.writeTodo(todoVO);
 	}
 	
 	@Override

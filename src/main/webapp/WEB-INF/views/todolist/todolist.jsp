@@ -38,9 +38,7 @@
 			success : function(data) {
 				console.log(data);
 				if (data=='1') {
-					let addTodo = ""
-					addTodo += '<div class="todo">${todolist.todo}</div>';
-					$("#todolist").append(addTodo);
+					selectTodo();
 				}
 			},
 			error : function(request, status, error) {
@@ -49,6 +47,24 @@
 			}
 		})
 	});
+	
+	function selectTodo() {
+		$.ajax({
+			url: "${pageContext.request.contextPath}/todolist/select",
+			type: "get",
+			data: $("#userId").val(),
+			dataType: "json",
+			success: function(data) {
+				if(data.size() > 0) {
+					console.log("가져옴");
+				}
+			},
+			error: function(request, status, error) {
+				alert("문제가 발생");
+				return;
+			}
+		})
+	}
 </script>
 </body>
 </html>

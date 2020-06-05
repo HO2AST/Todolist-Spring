@@ -8,6 +8,7 @@
 		WHERE USERID = #{userId}
 		AND DATE_FORMAT(REGDATE, '%Y%m%d') = DATE_FORMAT(NOW(), '%Y%m%d')
 	</select>
+	
 	<insert id="writeTodo" parameterType="UserVO">
 		INSERT INTO todolist
 		VALUES(#{userId}, #{todo}, NOW())

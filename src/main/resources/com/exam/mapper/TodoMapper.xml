@@ -2,15 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.exam.mapper.TodoMapper">
-	<select id="selectTodo" parameterType="String" resultType="UserVO">
-		SELECT USERID, TODO, REGDATE 
+	<select id="selectTodo" parameterType="String" resultType="TodoVO">
+		SELECT USERID, TODO, REGDATE
 		FROM todolist 
 		WHERE USERID = #{userId}
-		AND DATE_FORMAT(REGDATE, '%Y%m%d') = DATE_FORMAT(NOW(), '%Y%m%d')
+		AND REGDATE = DATE_FORMAT(NOW(), '%Y%m%d')
 	</select>
 	
-	<insert id="writeTodo" parameterType="UserVO">
+	<insert id="writeTodo" parameterType="TodoVO">
 		INSERT INTO todolist
-		VALUES(#{userId}, #{todo}, NOW())
+		VALUES(#{userId}, #{todo}, DATE_FORMAT(NOW(), '%Y%m%d'))
 	</insert>
 </mapper>

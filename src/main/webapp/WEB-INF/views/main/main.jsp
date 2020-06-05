@@ -17,10 +17,10 @@
 		<div id="main">
 			<table>
 				<tr>
-					<td><lable>아이디 : </lable></td><td><input name="userId" id="userId" width="20px"/></td>
+					<td><label>아이디 : </label></td><td><input name="userId" id="userId" width="20px"/></td>
 				</tr>
 				<tr>
-					<td><lable>비밀번호 : </lable></td><td><input name="userPasswd" id="userPasswd" type="password" width="20px"/></td>
+					<td><label>비밀번호 : </label></td><td><input name="userPasswd" id="userPasswd" type="password" width="20px"/></td>
 				</tr>
 			</table>
 		</div>

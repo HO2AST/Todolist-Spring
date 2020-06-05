@@ -6,7 +6,7 @@ import com.exam.domain.TodoVO;
 
 public interface TodoMapper {
 	
-	int writeTodo(TodoVO todoVO);
+	int writeTodo(TodoVO todoVO);	
 	
 	List<TodoVO> selectTodo(String userId);
 }

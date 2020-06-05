@@ -9,5 +9,5 @@ import lombok.Data;
 public class TodoVO {
 	String userId;
 	String todo;
-	Date regDate;
+	String regDate;
 }

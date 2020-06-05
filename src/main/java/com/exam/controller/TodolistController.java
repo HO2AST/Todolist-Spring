@@ -23,16 +23,16 @@ public class TodolistController {
 	TodoService todoService;
 	
 	@GetMapping("/")
-	public String todoMain() {
+	public String todoMain() throws Exception {
 		return "todolist/todolist";
 	}
 	
 	@PostMapping("/write")
 	@ResponseBody
-	public String todolist(TodoVO todoVO, Model model) {
+	public String todolist(TodoVO todoVO, Model model) throws Exception {
 		
 		int result = todoService.writeTodo(todoVO);
-		
+		System.out.println(result);
 		if (result == 1) {
 			return "1";
 		} else {
@@ -42,8 +42,14 @@ public class TodolistController {
 	
 	@GetMapping("/select")
 	@ResponseBody
-	public List<TodoVO> selectTodo(@RequestParam("userId") String userId) {
+	public List<TodoVO> selectTodo(@RequestParam("userId") String userId) throws Exception {
+		System.out.println(userId);
 		List<TodoVO> list = todoService.selectTodo(userId);
+		
+		for(int i = 0; i < list.size(); i++) {
+			System.out.println("아니" + list.get(i));
+		}
+		
 		return list;
 	}
 }

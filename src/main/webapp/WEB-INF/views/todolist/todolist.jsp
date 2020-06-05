@@ -16,9 +16,9 @@
 			<input type="hidden" id="userId" name="userId" value="${id}"/>
 			<input name="todo" id="todo" type="text" width="100px" height="15px" placeholder="할일을 입력하세요."/><button id="writeTodo">등록하기</button>
 		</form> 
-		<div id="todolist">
-			
-		</div>
+	</div>
+	<div id="todolist">
+		
 	</div>
 	
 
@@ -37,7 +37,7 @@
 			data : $("#todo_form").serialize(),
 			success : function(data) {
 				console.log(data);
-				if (data=='1') {
+				if (data == "1") {
 					selectTodo();
 				}
 			},
@@ -52,8 +52,7 @@
 		$.ajax({
 			url: "${pageContext.request.contextPath}/todolist/select",
 			type: "get",
-			data: $("#userId").val(),
-			dataType: "json",
+			data: {userId : $("#userId").val()},
 			success: function(data) {
 				if(data.size() > 0) {
 					console.log("가져옴");

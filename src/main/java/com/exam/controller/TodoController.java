@@ -16,8 +16,8 @@ import com.exam.domain.TodoVO;
 import com.exam.service.TodoService;
 
 @Controller
-@RequestMapping("/todolist/")
-public class TodolistController {
+@RequestMapping("/todolist")
+public class TodoController {
 	
 	@Autowired
 	TodoService todoService;
@@ -32,7 +32,7 @@ public class TodolistController {
 	public String todolist(TodoVO todoVO, Model model) throws Exception {
 		
 		int result = todoService.writeTodo(todoVO);
-		System.out.println(result);
+		System.out.println("/write" + result);
 		if (result == 1) {
 			return "1";
 		} else {

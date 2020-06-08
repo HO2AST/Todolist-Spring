@@ -1,6 +1,7 @@
 package com.exam.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,7 @@ public class TodoServiceImpl implements TodoService{
 	}
 	
 	@Override
-	public List<TodoVO> selectTodo(String userId) {
+	public List<Map> selectTodo(String userId) {
 		return todoMapper.selectTodo(userId);
 	}
 }

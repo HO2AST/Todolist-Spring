@@ -30,12 +30,12 @@
 		}
 		
 		$.ajax({
-			url : "${pageContext.request.contextPath}/todolist/write",
+			url : "${pageContext.request.contextPath}/todo/write",
 			type : "post",
 			data : $("#todo_form").serialize(),
 			success : function(data) {
 				console.log("/write = " + data);
-				if (data == "1") {
+				if (data == "11") {
 					selectTodo();
 				}
 			},
@@ -48,12 +48,14 @@
 	
 	function selectTodo() {
 		$.ajax({
-			url: "${pageContext.request.contextPath}/todolist/select",
-			type: "get",
+			url: "${pageContext.request.contextPath}/todo/select",
+			type: "post",
+			datatype: "JSON",
 			data: {userId : $("#userId").val()},
 			success: function(data) {
+				consol.log(data.get(1));
 				if(data.size() > 0) {
-					console.log("가져옴");
+	 				document.location.href="${pageContext.request.contextPath}/todo";
 				}
 			},
 			error: function(request, status, error) {

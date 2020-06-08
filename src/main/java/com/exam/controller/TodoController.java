@@ -16,13 +16,13 @@ import com.exam.domain.TodoVO;
 import com.exam.service.TodoService;
 
 @Controller
-@RequestMapping("/todolist")
+@RequestMapping("/todo")
 public class TodoController {
 	
 	@Autowired
 	TodoService todoService;
 	
-	@GetMapping("/")
+	@GetMapping
 	public String todoMain() throws Exception {
 		return "todolist/todolist";
 	}
@@ -34,22 +34,20 @@ public class TodoController {
 		int result = todoService.writeTodo(todoVO);
 		System.out.println("/write" + result);
 		if (result == 1) {
-			return "1";
+			return "11";
 		} else {
-			return "0";
+			return "00";
 		}
 	}
 	
-	@GetMapping("/select")
+	@PostMapping("/select")
 	@ResponseBody
-	public List<TodoVO> selectTodo(@RequestParam("userId") String userId) throws Exception {
+	public List<Map> selectTodo(@RequestParam("userId") String userId) throws Exception {
 		System.out.println(userId);
-		List<TodoVO> list = todoService.selectTodo(userId);
+		List<Map> todoMap = todoService.selectTodo(userId);
 		
-		for(int i = 0; i < list.size(); i++) {
-			System.out.println("아니" + list.get(i));
-		}
+		System.out.println(todoMap);
 		
-		return list;
+		return todoMap;
 	}
 }

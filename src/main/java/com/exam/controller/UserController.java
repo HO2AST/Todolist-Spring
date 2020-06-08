@@ -27,13 +27,11 @@ public class UserController {
 	public String login(HttpSession session, UserVO userVO) throws Exception {
 
 		List<UserVO> list = userService.selectUser(userVO);
-		System.out.println(list.size());
 		if (list.size() > 0) { 
 			session.setAttribute("id", userVO.getUserId());
 			return "1";
 		} else { 
 			return "0"; 
 		}
-
 	}
 }

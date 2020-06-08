@@ -14,14 +14,20 @@
 	<div>
 		<form id="todo_form" method="post">
 			<input type="hidden" id="userId" name="userId" value="${id}"/>
-			<input name="todo" id="todo" type="text" width="100px" height="15px" placeholder="할일을 입력하세요."/><button id="writeTodo">등록하기</button>
-		</form> 
+			<input name="todo" id="todo" type="text" width="100px" height="15px" placeholder="할일을 입력하세요."/>
+		</form>
+		<button id=btnWrite>등록하기</button>
 	</div>
-	<div id="todolist">
-		
+	<div>
+		<table id="todolist">
+			<tr>
+				<td>할일</td>
+				<td>등록일자</td>
+			</tr>
+		</table>
 	</div>
 <script>
-	$("#writeTodo").click(function() {
+	$("#btnWrite").click(function() {
 		let todolist = $("#todo").val();
 		
 		if (todolist == "") {
@@ -49,13 +55,17 @@
 	function selectTodo() {
 		$.ajax({
 			url: "${pageContext.request.contextPath}/todo/select",
-			type: "post",
+			type: "POST",
 			datatype: "JSON",
-			data: {userId : $("#userId").val()},
+			data: JSON.stringify({"userId" : $("#userId").val()}),
 			success: function(data) {
-				consol.log(data.get(1));
-				if(data.size() > 0) {
-	 				document.location.href="${pageContext.request.contextPath}/todo";
+				console.log(data);
+				alert(data);
+				if(data.length() > 0) {
+					$.each(JSON.parse(data), function (index, item) {
+						console.log(data)
+						$("#todolist").append("<tr><td>"+data[index].TODO+"</td><td>" + data[index].REGDATE +"</td></tr>")
+					})
 				}
 			},
 			error: function(request, status, error) {

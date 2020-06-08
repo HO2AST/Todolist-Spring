@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -22,7 +23,8 @@ public class TodoController {
 	@Autowired
 	TodoService todoService;
 	
-	@GetMapping
+//	(value = "", method = {RequestMethod.POST,RequestMethod.GET})
+	@RequestMapping
 	public String todoMain() throws Exception {
 		return "todolist/todolist";
 	}
@@ -43,10 +45,10 @@ public class TodoController {
 	@PostMapping("/select")
 	@ResponseBody
 	public List<Map> selectTodo(@RequestParam("userId") String userId) throws Exception {
-		System.out.println(userId);
+		System.out.println("유저아디는" + userId);
 		List<Map> todoMap = todoService.selectTodo(userId);
 		
-		System.out.println(todoMap);
+		System.out.println(todoMap.get(0));
 		
 		return todoMap;
 	}

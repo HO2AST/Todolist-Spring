@@ -62,8 +62,7 @@
 			data: JSON.stringify({"userId" : userId}),
 			success: function(data) {
 				console.log(data);
-				$.each(JSON.parse(data), function (index, item) {
-					alert(data[1].todo)
+				$.each(data, function (index, item) {
 					$("#todolist").append("<tr><td>"+data[index].TODO+"</td><td>" + data[index].REGDATE +"</td></tr>")
 				})
 			},

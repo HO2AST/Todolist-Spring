@@ -26,4 +26,9 @@ public class TodoServiceImpl implements TodoService{
 	public List<Map> selectTodo(String userId) {
 		return todoMapper.selectTodo(userId);
 	}
+	
+	@Override
+	public Map<String, Object> addTodo(String userId) {
+		return todoMapper.addTodo(userId);
+	}
 }

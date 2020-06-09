@@ -11,4 +11,6 @@ public interface TodoService {
 	int writeTodo(TodoVO todoVO);
 	
 	List<Map> selectTodo(String userId);
+	
+	Map<String, Object> addTodo(String userId);
 }

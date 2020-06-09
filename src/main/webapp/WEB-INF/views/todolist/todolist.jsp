@@ -27,6 +27,11 @@
 		</table>
 	</div>
 <script>
+	$(widnow).onload(function() {
+		selectTodo();
+	})
+	
+	
 	$("#btnWrite").click(function() {
 		let todolist = $("#todo").val();
 		
@@ -42,7 +47,7 @@
 			success : function(data) {
 				console.log("/write = " + data);
 				if (data == "11") {
-					selectTodo();
+					addTodo();
 				}
 			},
 			error : function(request, status, error) {
@@ -63,6 +68,28 @@
 			success: function(data) {
 				console.log(data);
 				$.each(data, function (index, item) {
+					$("#todolist").append("<tr><td>"+data[index].TODO+"</td><td>" + data[index].REGDATE +"</td></tr>")
+				})
+			},
+			error: function(request, status, error) {
+				alert("문제가 발생");
+				return;
+			}
+		})
+	}
+	
+	function addTodo() {
+		let userId = $("#userId").val();
+		$.ajax({
+			url: "${pageContext.request.contextPath}/todo/add",
+			type: "POST",
+			datatype: "JSON",
+	        contentType: "application/json",
+			data: JSON.stringify({"userId" : userId}),
+			success: function(data) {
+				console.log(data);
+				$.each(data, function (index, item) {
+					let index = data.length - 1;
 					$("#todolist").append("<tr><td>"+data[index].TODO+"</td><td>" + data[index].REGDATE +"</td></tr>")
 				})
 			},

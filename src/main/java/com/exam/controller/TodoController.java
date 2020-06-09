@@ -64,4 +64,17 @@ public class TodoController {
 		System.out.println(jsonArray);
 		return jsonArray;
 	}
+	
+	@PostMapping("/add")
+	@ResponseBody
+	public Map<String, Object> addTodo(@RequestBody HashMap<String, Object> map) throws Exception {
+		String userId = map.get("userId").toString();
+		Map<String, Object> todoMap = todoService.addTodo(userId);
+		
+		JSONArray jsonArray = new JSONArray();
+		jsonArray.add(todoMap);
+		
+		return jsonArray;
+		
+	}
 }

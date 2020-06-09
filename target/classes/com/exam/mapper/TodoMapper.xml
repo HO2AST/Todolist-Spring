@@ -13,4 +13,17 @@
 		INSERT INTO todolist
 		VALUES(#{userId}, #{todo}, DATE_FORMAT(NOW(), '%Y%m%d'))
 	</insert>
+	
+	<select id="addTodo" parameterType="String" resultType="map">
+		SELECT A.USERID, A.TODO
+		  FROM (
+		  		SELECT ROW_NUMBER() OVER (PARTITION BY USERID ORDER BY REGTIME) AS ROWNUM
+				   	 , USERID
+					 , TODO
+					 , REGDATE
+				  FROM todolist
+				 WHERE USERID = #{userId} AND REGDATE = DATE_FORMAT(NOW(), '%Y%m%d')
+			   ) A
+		 WHERE A.ROWNUM = '1'
+	</select>
 </mapper>

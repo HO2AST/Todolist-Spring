@@ -1,13 +1,16 @@
 package com.exam.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.json.simple.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -44,12 +47,21 @@ public class TodoController {
 	
 	@PostMapping("/select")
 	@ResponseBody
-	public List<Map> selectTodo(@RequestParam("userId") String userId) throws Exception {
+	public List<Map> selectTodo(@RequestBody HashMap<String, Object> map) throws Exception {
+		String userId = map.get("userId").toString();
 		System.out.println("유저아디는" + userId);
 		List<Map> todoMap = todoService.selectTodo(userId);
 		
+		System.out.println(todoMap.size());
 		System.out.println(todoMap.get(0));
+		System.out.println(todoMap);
 		
-		return todoMap;
+		JSONArray jsonArray = new JSONArray();
+		for (Map<String, Object> jsonMap : todoMap) {
+			jsonArray.add(jsonMap);
+		}
+		
+		System.out.println(jsonArray);
+		return jsonArray;
 	}
 }

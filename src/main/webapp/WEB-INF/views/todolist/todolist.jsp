@@ -53,20 +53,19 @@
 	});
 	
 	function selectTodo() {
+		let userId = $("#userId").val();
 		$.ajax({
 			url: "${pageContext.request.contextPath}/todo/select",
 			type: "POST",
 			datatype: "JSON",
-			data: JSON.stringify({"userId" : $("#userId").val()}),
+	        contentType: "application/json",
+			data: JSON.stringify({"userId" : userId}),
 			success: function(data) {
 				console.log(data);
-				alert(data);
-				if(data.length() > 0) {
-					$.each(JSON.parse(data), function (index, item) {
-						console.log(data)
-						$("#todolist").append("<tr><td>"+data[index].TODO+"</td><td>" + data[index].REGDATE +"</td></tr>")
-					})
-				}
+				$.each(JSON.parse(data), function (index, item) {
+					alert(data[1].todo)
+					$("#todolist").append("<tr><td>"+data[index].TODO+"</td><td>" + data[index].REGDATE +"</td></tr>")
+				})
 			},
 			error: function(request, status, error) {
 				alert("문제가 발생");

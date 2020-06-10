@@ -12,5 +12,5 @@ public interface TodoMapper {
 	
 	List<Map> selectTodo(String userId);
 	
-	Map<String, Object> addTodo(String userId);
+	List<Map> addTodo(String userId);
 }

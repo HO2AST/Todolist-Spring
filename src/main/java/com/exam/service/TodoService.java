@@ -12,5 +12,5 @@ public interface TodoService {
 	
 	List<Map> selectTodo(String userId);
 	
-	Map<String, Object> addTodo(String userId);
+	List<Map> addTodo(String userId);
 }

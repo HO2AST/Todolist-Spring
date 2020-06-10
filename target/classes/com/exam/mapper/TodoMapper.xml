@@ -11,13 +11,13 @@
 	
 	<insert id="writeTodo" parameterType="TodoVO">
 		INSERT INTO todolist
-		VALUES(#{userId}, #{todo}, DATE_FORMAT(NOW(), '%Y%m%d'))
+		VALUES(#{userId}, #{todo}, DATE_FORMAT(NOW(), '%Y%m%d'), NOW())
 	</insert>
 	
 	<select id="addTodo" parameterType="String" resultType="map">
-		SELECT A.USERID, A.TODO
+		SELECT A.USERID, A.TODO, A.REGDATE
 		  FROM (
-		  		SELECT ROW_NUMBER() OVER (PARTITION BY USERID ORDER BY REGTIME) AS ROWNUM
+		  		SELECT ROW_NUMBER() OVER (PARTITION BY USERID ORDER BY REGTIME DESC) AS ROWNUM
 				   	 , USERID
 					 , TODO
 					 , REGDATE

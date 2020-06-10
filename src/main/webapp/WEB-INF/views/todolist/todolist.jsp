@@ -19,7 +19,7 @@
 		<button id=btnWrite>등록하기</button>
 	</div>
 	<div>
-		<table id="todolist">
+		<table id="todolist" border="1px solid #444444">
 			<tr>
 				<td>할일</td>
 				<td>등록일자</td>
@@ -27,9 +27,9 @@
 		</table>
 	</div>
 <script>
-	$(widnow).onload(function() {
+	$(document).ready(function() {
 		selectTodo();
-	})
+	});
 	
 	
 	$("#btnWrite").click(function() {
@@ -45,7 +45,6 @@
 			type : "post",
 			data : $("#todo_form").serialize(),
 			success : function(data) {
-				console.log("/write = " + data);
 				if (data == "11") {
 					addTodo();
 				}
@@ -66,10 +65,11 @@
 	        contentType: "application/json",
 			data: JSON.stringify({"userId" : userId}),
 			success: function(data) {
-				console.log(data);
-				$.each(data, function (index, item) {
-					$("#todolist").append("<tr><td>"+data[index].TODO+"</td><td>" + data[index].REGDATE +"</td></tr>")
-				})
+				if(data.length > 0) {
+					$.each(data, function (index, item) {
+						$("#todolist").append("<tr><td>"+data[index].TODO+"</td><td>" + data[index].REGDATE +"</td></tr>")
+					})
+				}
 			},
 			error: function(request, status, error) {
 				alert("문제가 발생");
@@ -87,11 +87,8 @@
 	        contentType: "application/json",
 			data: JSON.stringify({"userId" : userId}),
 			success: function(data) {
-				console.log(data);
-				$.each(data, function (index, item) {
-					let index = data.length - 1;
-					$("#todolist").append("<tr><td>"+data[index].TODO+"</td><td>" + data[index].REGDATE +"</td></tr>")
-				})
+				let index = data.length - 1;
+				$("#todolist").append("<tr><td>"+data[index].TODO+"</td><td>" + data[index].REGDATE +"</td></tr>")
 			},
 			error: function(request, status, error) {
 				alert("문제가 발생");

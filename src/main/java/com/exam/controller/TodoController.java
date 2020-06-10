@@ -37,7 +37,6 @@ public class TodoController {
 	public String todolist(TodoVO todoVO, Model model) throws Exception {
 		
 		int result = todoService.writeTodo(todoVO);
-		System.out.println("/write" + result);
 		if (result == 1) {
 			return "11";
 		} else {
@@ -49,32 +48,22 @@ public class TodoController {
 	@ResponseBody
 	public List<Map> selectTodo(@RequestBody HashMap<String, Object> map) throws Exception {
 		String userId = map.get("userId").toString();
-		System.out.println("유저아디는" + userId);
 		List<Map> todoMap = todoService.selectTodo(userId);
-		
-		System.out.println(todoMap.size());
-		System.out.println(todoMap.get(0));
-		System.out.println(todoMap);
 		
 		JSONArray jsonArray = new JSONArray();
 		for (Map<String, Object> jsonMap : todoMap) {
 			jsonArray.add(jsonMap);
 		}
 		
-		System.out.println(jsonArray);
 		return jsonArray;
 	}
 	
 	@PostMapping("/add")
 	@ResponseBody
-	public Map<String, Object> addTodo(@RequestBody HashMap<String, Object> map) throws Exception {
+	public List<Map> addTodo(@RequestBody HashMap<String, Object> map) throws Exception {
 		String userId = map.get("userId").toString();
-		Map<String, Object> todoMap = todoService.addTodo(userId);
+		List<Map> todoMap = todoService.addTodo(userId);
 		
-		JSONArray jsonArray = new JSONArray();
-		jsonArray.add(todoMap);
-		
-		return jsonArray;
-		
+		return todoMap;
 	}
 }

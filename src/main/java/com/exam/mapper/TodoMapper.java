@@ -13,4 +13,6 @@ public interface TodoMapper {
 	List<Map> selectTodo(String userId);
 	
 	List<Map> addTodo(String userId);
+	
+	int deleteTodo(TodoVO todoVO);
 }

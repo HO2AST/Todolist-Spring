@@ -66,4 +66,18 @@ public class TodoController {
 		
 		return todoMap;
 	}
+	
+	@PostMapping("/delete")
+	@ResponseBody
+	public int deleteTodo(@RequestBody HashMap<String, Object> map) throws Exception {
+		TodoVO todoVO = new TodoVO();
+		todoVO.setUserId(map.get("userId").toString());
+		todoVO.setRowNum(Integer.parseInt(map.get("rowNum").toString()));
+		System.out.println(todoVO);
+		todoService.deleteTodo(todoVO);
+		
+		int result = todoVO.getRowNum();
+		
+		return result;
+	}
 }

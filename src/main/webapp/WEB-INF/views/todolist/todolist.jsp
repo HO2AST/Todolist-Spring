@@ -67,7 +67,7 @@
 			success: function(data) {
 				if(data.length > 0) {
 					$.each(data, function (index, item) {
-						$("#todolist").append("<tr><td>"+data[index].TODO+"</td><td>" + data[index].REGDATE +"</td></tr>")
+						$("#todolist").append('<tr id='+data[index].ROWNUM+'><td>'+data[index].TODO+'</td><td>'+data[index].REGDATE+'</td><td><span id="del">X<span></td></tr>');
 					})
 				}
 			},
@@ -80,6 +80,7 @@
 	
 	function addTodo() {
 		let userId = $("#userId").val();
+		let rowNum = $('#todolist tr:last-child').index() + 1;
 		$.ajax({
 			url: "${pageContext.request.contextPath}/todo/add",
 			type: "POST",
@@ -88,7 +89,7 @@
 			data: JSON.stringify({"userId" : userId}),
 			success: function(data) {
 				let index = data.length - 1;
-				$("#todolist").append("<tr><td>"+data[index].TODO+"</td><td>" + data[index].REGDATE +"</td></tr>")
+				$("#todolist").append('<tr id='+rowNum+'><td>'+data[index].TODO+'</td><td>'+data[index].REGDATE+'</td><td><span id="del">X<span></td></tr>');
 			},
 			error: function(request, status, error) {
 				alert("문제가 발생");
@@ -96,6 +97,23 @@
 			}
 		})
 	}
+	
+	$(document).on('click', 'span', function() {
+		let userId = $("#userId").val();
+		let rowNum = $(this).parent().parent().attr("id");
+		$.ajax({
+			url: "${oageContext.request.contextPath}/todo/delete",
+			type: "POST",
+			datatype: "JSON",
+	        contentType: "application/json",
+			data: JSON.stringify({"userId" : userId, "rowNum" : rowNum}),
+			success: function(data) {
+				if(data != "") {
+					$('#'+data).remove();
+				}
+			}
+		})
+	})
 </script>
 </body>
 </html>

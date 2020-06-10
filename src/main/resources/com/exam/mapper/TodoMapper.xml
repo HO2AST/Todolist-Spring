@@ -3,27 +3,30 @@
 
 <mapper namespace="com.exam.mapper.TodoMapper">
 	<select id="selectTodo" parameterType="String" resultType="map">
-		SELECT USERID, TODO, REGDATE
-		FROM todolist 
-		WHERE USERID = #{userId}
-		AND REGDATE = DATE_FORMAT(NOW(), '%Y%m%d')
+  		SELECT ROWNUM
+		   	 , USERID
+			 , TODO
+			 , REGDATE
+		  FROM todolist
+		 WHERE USERID = #{userId} AND REGDATE = DATE_FORMAT(NOW(), '%Y%m%d')
 	</select>
 	
 	<insert id="writeTodo" parameterType="TodoVO">
-		INSERT INTO todolist
+		INSERT INTO todolist (USERID, TODO, REGDATE, REGTIME)
 		VALUES(#{userId}, #{todo}, DATE_FORMAT(NOW(), '%Y%m%d'), NOW())
 	</insert>
 	
 	<select id="addTodo" parameterType="String" resultType="map">
-		SELECT A.USERID, A.TODO, A.REGDATE
-		  FROM (
-		  		SELECT ROW_NUMBER() OVER (PARTITION BY USERID ORDER BY REGTIME DESC) AS ROWNUM
-				   	 , USERID
-					 , TODO
-					 , REGDATE
-				  FROM todolist
-				 WHERE USERID = #{userId} AND REGDATE = DATE_FORMAT(NOW(), '%Y%m%d')
-			   ) A
-		 WHERE A.ROWNUM = '1'
+		SELECT ROWNUM
+		   	 , USERID
+			 , TODO
+			 , REGDATE
+		  FROM todolist
+		 WHERE  ROWNUM = (SELECT MAX(ROWNUM) FROM todolist WHERE USERID = #{userId} AND REGDATE = DATE_FORMAT(NOW(), '%Y%m%d'));
 	</select>
+	
+	<delete id="deleteTodo" parameterType="TodoVO">
+		DELETE FROM todolist
+		WHERE userId = #{userId} AND ROWNUM = #{rowNum}
+	</delete>
 </mapper>

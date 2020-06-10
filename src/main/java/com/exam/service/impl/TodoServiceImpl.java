@@ -31,4 +31,9 @@ public class TodoServiceImpl implements TodoService{
 	public List<Map> addTodo(String userId) {
 		return todoMapper.addTodo(userId);
 	}
+	
+	@Override
+	public int deleteTodo(TodoVO todoVO) {
+		return todoMapper.deleteTodo(todoVO);
+	}
 }

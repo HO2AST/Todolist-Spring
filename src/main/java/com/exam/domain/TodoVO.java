@@ -10,4 +10,5 @@ public class TodoVO {
 	String userId;
 	String todo;
 	String regDate;
+	int rowNum;
 }
